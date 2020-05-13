@@ -31,7 +31,7 @@ def main():
 
     os.chmod("/home/project/encodedFiles/final_new.txt", stat.S_IRWXO)
     os.chown("path", "root", "root")
-    copyfile('/home/project/encodedFiles/*.txt', '/tmp/cdrs-id_indosat_vad/incoming/ADJUSTMENTS/')
+    copyfile('/home/project/encodedFiles/*.txt', '/tmp/xxxxxx/incoming/ADJUSTMENTS/')
 
 
 if __name__ == "__main__":
