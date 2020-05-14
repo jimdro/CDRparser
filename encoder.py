@@ -1,18 +1,35 @@
 """
 Created by Dimitrios Drosos at 12/05/2020
+email: dimitriss.drosos@gmail.com
 """
 import asn1
 import subprocess
 from shutil import copyfile
 import os, sys, stat
+from schema import Schema
+import time
 
 def main():
-    try:
-        f = open("AIROUTPUTCDR_4006_XPKABJM01_3518_20200313-175940.AIR.txt", "r")
-    except:
-        print("Give a valid txt file or you haven't gave anything as an input")
+    project = []
+    project_name = str(input("Give the name of your project: "))
+    project.append(project_name)
+    print(project)
 
+    cdr_name = str(input("Give the name of your cdr which you like to encode: "))
+    if cdr_name == '' or cdr_name == 'null':
+        print("Give correct name")
+    else:
+        print("Exit")
+
+    f = open(cdr_name, "r")
     print(f.read())
+
+    # try:
+    #     f = open(cdr_name, "r")
+    # except:
+    #     print("Give a valid txt file or you haven't gave anything as an input")
+    #
+    # print(f.read())
 
     # Encoding_process
     f = asn1.Encoder()
@@ -21,7 +38,7 @@ def main():
     final = f.output()
 
     # Create new file for encoded
-    encoded = open("final_new.txt", "w+")
+    encoded = open("final_new.AIR", "w+")
     encoded.write(str(final))
     print(encoded.read())
 
@@ -29,9 +46,10 @@ def main():
     if not os.path.exists("/home/project/encodedFiles"):
         os.makedirs("/home/project/encodedFiles")
 
-    os.chmod("/home/project/encodedFiles/final_new.txt", stat.S_IRWXO)
+    os.chmod("/home/project/encodedFiles/final_new.AIR", stat.S_IRWXO)
     os.chown("path", "root", "root")
     copyfile('/home/project/encodedFiles/*.txt', '/tmp/xxxxxx/incoming/ADJUSTMENTS/')
 
 
 if __name__ == "__main__":
+    main()
